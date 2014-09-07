@@ -1,0 +1,27 @@
+{% extends "homepage.html" %}
+{% block title %} Login {% endblock %}
+
+{% block content_top %}
+
+<div id="area">
+	<div id="area_headline"><div id="areatext">Login zum Kassensystem</div></div>
+	<div id="area_content"><div id="areatext">
+		Hier können sich Mitarbeiter der Mark anmelden, um das System zu verwalten und Bestellungen aufzunehmen.
+	</div></div>
+</div>
+{% endblock %}
+
+{% block content_bottom %}
+<div id="area">
+	<div id="area_headline"><div id="areatext">LOGIN</div></div>
+	<div id="area_content"><br>
+		<div id="areatext">
+			<form name="loginform" action="/system/login.html" method="POST">
+				Benutzer: <input type="text" id="uname_text" onclick="keyboardSetup('uname_text')" name="username" \><br>
+				Passwort: <input type="password" id="upassword_text" onclick="keyboardSetup('upassword_text')" name="password" \><br />
+				<button type="submit" id="button_general">Anmelden</button><br />
+			</form>
+		</div>
+	</div>
+</div>
+{% endblock %}

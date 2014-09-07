@@ -1,0 +1,24 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		{% block head %}
+		<meta charset='utf-8'>
+		<link rel="stylesheet" href="/static/css/base.css" />
+              <script src="/static/js/keyboard.js" charset="UTF-8" type="text/javascript"></script>
+		<script charset="UTF-8" type="text/javascript">
+		{% if generated_javascript %}
+			{{ generated_javascript }}
+		{% endif %}
+		</script>
+		<title>{% block title %} {% endblock %} </title>
+		{% endblock %}
+	</head>
+	<body>
+	<div id="sidebar_top">{% block sidebar_top %} {% endblock %}</div>
+	<div id="sidebar_bottom">{% block sidebar_bottom %}{% endblock %} </div>
+	<div id="content_top">{% block content_top %} {% endblock %}</div>
+	<div id="content_bottom">{% block content_bottom %} {% endblock %}</div>
+	<div id="footer">{% block footer %} {% endblock %}</div>
+        <div id="keyboard"></div>
+	</body>
+</html>

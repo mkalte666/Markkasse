@@ -1,0 +1,150 @@
+
+@font-face {
+    font-family: Roboto;
+    src: url(../font/Roboto-Thin.ttf);
+}
+
+
+body {
+    position: fixed;
+	margin-top: 0px;
+	background-color: #eeeeee;
+	font-family: Roboto;
+	color: #e98f0a;
+}
+
+body div#sidebar_top {
+	position: fixed;
+	widht: 224px;
+}
+
+body div#sidebar_bottom {
+	position: fixed;
+	widht: 224px;
+	top: 110px;
+}
+
+body div#sidebar_bottom div#area {
+	position: relative;
+	width: 180px;
+	box-shadow: 0px 0px 16px 2px rgba(0,0,0,0.3);
+	border-radius: 6px 6px 6px 6px;
+	background-color: #737373;
+}
+
+
+body div#sidebar_bottom div#area div#area_headline{
+	margin-top: 10px;
+	background-color: #505050;
+	height: 35px;
+	border-radius: 6px 6px 0px 0px;
+	font-size: 20px;
+}
+
+body div#sidebar_bottom div#area div#area_content{
+	background-color: #737373;
+	border-radius: 0px 0px 6px 6px;
+	min-height: 70px;
+}
+
+body div#sidebar_top div#image {
+	margin-left: -10px;
+	margin-top: 10px;
+}
+
+body div#content_top {
+    position: fixed;
+	top: 5px;
+    width: 800px;
+    left: 200px;
+}
+
+
+body div#content_top div#area {
+	position: relative;
+    height: 95px;
+	width: 800px;
+    margin-top: 15px;
+    border-radius: 6px;
+    background-color: #737373;
+	box-shadow: 0px 0px 16px 2px rgba(0,0,0,0.3);
+}
+
+body div#content_top div#area div#area_headline{
+    position: absolute;
+    height: 35px;
+    width: 800px;
+    margin-top: 0px;
+    background-color: #505050;
+    border-radius: 6px 6px 0px 0px;
+	font-size: 25px;
+}
+
+body div#content_top div#area div#area_content{
+    position: absolute;
+    height: 60px;
+    width: 800px;
+    margin-top: 35px;
+    background-color: #737373;
+    border-radius: 0px 0px 6px 6px
+    
+}
+
+body div#content_bottom {
+    position: fixed;
+    width: 800px;
+    left: 200px;
+	top: 125px;
+}
+
+body div#content_bottom div#area {
+	position: relative;
+	width: 800px;
+	box-shadow: 0px 0px 16px 2px rgba(0,0,0,0.3);
+	border-radius: 6px 6px 6px 6px;
+	background-color: #737373;
+}
+
+body div#content_bottom div#area div#area_headline{
+	margin-top: 10px;
+	background-color: #505050;
+	height: 35px;
+	width: 800px;
+	border-radius: 6px 6px 0px 0px;
+	font-size: 20px;
+}
+
+body div#content_bottom div#area div#area_content{
+	background-color: #737373;
+	border-radius: 0px 0px 6px 6px;
+	min-height: 70px;
+	width: 800px;
+}
+
+body div#areatext {
+	position: relative;
+	left: 10px;
+}
+
+body div#area_content div#areatext {
+	position: relative;
+	top: 0px;
+	color: #d99f1a;
+}
+
+body div#keyboard {
+	position: fixed;
+	height: 350px;
+	width: 1024;
+	top: 418px;
+	left: 0px;
+}
+
+body div#keyboard button {
+	min-width: 68px;
+	min-height: 50px;
+	
+}
+
+
+
