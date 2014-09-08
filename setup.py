@@ -50,10 +50,12 @@ print "Creating Database..."
 connection = sqlite3.connect("./marksystem/db/mark.db")
 cursor = connection.cursor()
 cursor.execute('''CREATE TABLE user_info(id INTEGER PRIMARY KEY, name TEXT, hash TEXT, session TEXT, userlevel INTEGER)''')
-cursor.execute('''CREATE TABLE products(id INTEGER PRIMARY KEY, name TEXT, cost REAL, amoutInStock INTEGER, image TEXT, isSubproduct BOOLEAN, parent TEXT)''')
+cursor.execute('''CREATE TABLE products(id INTEGER PRIMARY KEY, name TEXT, price REAL, amoutInStock INTEGER, image TEXT, isSubproduct BOOLEAN, parent INTEGER, isBuyable INTEGER)''')
 cursor.execute('''CREATE TABLE transactions(id INTEGER PRIMARY KEY, description TEXT, inflow REAL, outflow REAL, userID INTEGER, productIDs TEXT, isGenerated BOOLEAN, date TEXT)''')
-cursor.execute('''CREATE TABLE debtTransactions(id INTEGER PRIMARY KEY, transactoinID INTEGER, isPayed BOOLEAN, userID INTEGER)''')
+cursor.execute('''CREATE TABLE pending_orders(id INTEGER PRIMARY KEY, transactionId INTEGER)''')
+cursor.execute('''CREATE TABLE debtTransactions(id INTEGER PRIMARY KEY, transactionId INTEGER, isPayed BOOLEAN, userId INTEGER)''')
 print "Setting basic information in Database"
+cursor.execute('''insert into products(name, price, isSubproduct, parent, isBuyable) values ('remove me!', 3.0, 0, -1, 1)''')
 print "Set Root User:"
 username = str(raw_input("Username: "))
 password = "not the"
@@ -72,6 +74,9 @@ print "Genarating files"
 sessionKey = os.urandom(24).encode('hex')
 outfile = open('./marksystem/generated.py', 'w')
 outfile.write("secretKey = '"+str(sessionKey)+"'\n")
+maxdays = 6
+maxdays = input("Input maximal time user can owe the system Money:")
+outfile.write("maxdays = "+str(maxdays)+"\n")
 outfile.close()
 print "Done!"
 

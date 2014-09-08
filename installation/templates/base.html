@@ -7,7 +7,9 @@
               <script src="/static/js/keyboard.js" charset="UTF-8" type="text/javascript"></script>
 		<script charset="UTF-8" type="text/javascript">
 		{% if generated_javascript %}
+			{% autoescape false %}
 			{{ generated_javascript }}
+			{% endautoescape %}
 		{% endif %}
 		</script>
 		<title>{% block title %} {% endblock %} </title>

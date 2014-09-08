@@ -49,7 +49,7 @@ def systemSelling():
 	#securety check
 	if util.checkSession(session) == False:
 		return redirect(url_for('systemAccess'))
-	return render_template('selling.html')
+	return render_template('selling.html', generated_javascript = util.generatedJavascript())
 
 #start if the web-application
 def StartWeb(shouldDebug=False):

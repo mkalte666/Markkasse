@@ -1,16 +1,16 @@
 //Generated vars for the product selection
-var pIds = [0,1,2,3,4,5];
-var names = ["Sandwich", "Getr�nk", "Snack", "K�se", "Chester", "Allg�uer"];
-var prices = [0.40, 0.50, 0.00, 0.00, 0.10, 0.10];
-var pHasParent = [false, false, false, true, true, true];
-var pShouldOutput = [true, true, true, false, true, true];
-var parents = [-1, -1, -1, 0, 3, 3];
+//var pIds = [0,1,2,3,4,5];
+//var names = ["Sandwich", "Getr�nk", "Snack", "K�se", "Chester", "Allg�uer"];
+//var prices = [0.40, 0.50, 0.00, 0.00, 0.10, 0.10];
+//var pHasParent = [false, false, false, true, true, true];
+//var pShouldOutput = [true, true, true, false, true, true];
+//var parents = [-1, -1, -1, 0, 3, 3];
 
 //Generated vars for the user selection
-var RawUsers = ["Malte Kie�ling", "Robin Beckmeyer", "Max-Malte Hansen"];
-var uIds = [0, 1, 10];
-var uAbleToBuy = [true, true, false];
-var debts = [1.50, 2.50, 10.98];
+//var RawUsers = ["Malte Kie�ling", "Robin Beckmeyer", "Max-Malte Hansen"];
+//var uIds = [0, 1, 10];
+//var uAbleToBuy = [true, true, false];
+//var debts = [1.50, 2.50, 10.98];
 
 //user creation control
 var ActiveUser = {};
