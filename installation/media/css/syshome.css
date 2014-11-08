@@ -1,0 +1,80 @@
+body div#content_bottom div#area div#area_content{
+    min-height: 300px;   
+}
+
+div#sidebar_bottom button {
+    width:150px;
+    height: 50px;
+    border-radius: 10px;
+    border-color: #000000;
+    background-color: #000000;
+    font-family: Roboto;
+    color: #e98f0a;
+    font-size: 20px;
+    margin-top: 10px;
+    box-shadow: 0px 0px 16px 2px rgba(0,0,0,0.3);
+}
+
+body div#sidebar_bottom div#area div#area_content {
+    min-height: 500px;   
+    overflow-x: none;
+}
+
+
+body div#content_bottom div#area div#area_content {
+    min-height: 485px;   
+    overflow-x: auto;
+}
+
+div#PendingOrder_content {
+    
+}
+
+div#PendingOrder_content div#singlePendingOrder {
+    position: relative;
+    background-color: #333333;
+    border-radius: 10px;
+    border-color: #000000;
+    box-shadow: 0px 0px 16px 2px rgba(0,0,0,0.3);
+    width: 500px;
+    margin-left: 20px;
+    margin-top: 4px;
+}
+
+div#PendingOrder_content div#singlePendingOrder div#PendingOrderUser {
+    background-color: #000000;
+    width: 300px;
+    border-radius: 10px 0px;
+    text-align: center;
+}
+
+div#PendingOrder_content div#singlePendingOrder div#PendingOrderProduct {
+    margin-left: 20px;
+    height:     25px;
+}
+
+div#PendingOrder_content div#singlePendingOrder button#FinishPendingOrderButton {
+    position: absolute;
+    background-color: #000000;
+    right: 30px;
+    top: 10px;
+    color: #e98f0a;
+    box-shadow: 0px 0px 16px 2px rgba(0,0,0,0.3);
+    width: 50px;
+    height: 50px;
+    border-radius: 35px;
+    border-color: #000000;
+}
+
+div#PendingOrder_content div#singlePendingOrder button#CancelPendingOrderButton {
+    position: absolute;
+    background-color: #000000;
+    right: 100px;
+    top: 10px;
+    color: #e98f0a;
+    box-shadow: 0px 0px 16px 2px rgba(0,0,0,0.3);
+    width: 80px;
+    height: 50px;
+    border-radius: 35px;
+    border-color: #000000;
+}

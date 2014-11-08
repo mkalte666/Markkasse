@@ -1,0 +1,51 @@
+{% extends "homepage.html" %} 
+{% block title %}Index{% endblock %}
+{% block head %}
+    {{ super() }}
+	<link rel="stylesheet" href="/static/css/syshome.css" />
+	<script src="/static/js/selling.js" type="text/javascript"></script>
+	<script src="/static/js/pending.js" type="text/javascript"></script>
+{% endblock %}
+
+{% block content_top %}
+<div id="area">
+	<div id="area_headline"><div id="areatext"><div id="usernameOutput" >Mark Management System</div></div></div>
+	<div id="area_content">
+		<div id="headline"><div id="areatext"></div></div>
+	</div>
+</div>
+{% endblock %}
+
+
+{% block content_bottom %}
+<div id="area">
+	<div id="area_headline"><div id="areatext">Menu</div></div>
+	<div id="area_content"><div id="areatext">
+		<div id="content">
+			<div id="PendingOrder_content">
+
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+	DrawPendingOrders("PendingOrder_content", true, 5, 4);
+</script>
+{% endblock %}
+
+
+{% block sidebar_bottom %}
+<div id="area">
+	<div id="area_headline"><div id="areatext">Menu</div></div>
+	<div id="area_content"><div id="areatext">
+		<button onclick="document.location.href = '/system/selling.html';">Selling</button>
+		<button onclick="document.location.href = '/system/transaction.html';">Transactions</button>
+		<button onclick="document.location.href = '/system/pmanager.html';">Products</button>
+		<button onclick="document.location.href = '/system/umanager.html';">Usermanager</button>
+		<button onclick="document.location.href = '/system/logout.html';">Logout</button>
+	</div>
+	</div>
+</div>
+{% endblock %}
+
+

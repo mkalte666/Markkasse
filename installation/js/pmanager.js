@@ -141,13 +141,13 @@ function DrawProductScreen() {
 	if (isParentActive===false) {
 		for(var i = 0; i<products.length;i++) {
 			if(products[i].hasParent===false) {
-				document.getElementById('content').innerHTML += "<div id=\"product\" onclick=\"ProductSelected("+i+")\">"+products[i].name+" - "+products[i].price+"</div>";
+				document.getElementById('content').innerHTML += "<div id=\"product\" onclick=\"ProductSelected("+i+")\">"+products[i].name+"</div>";
 			}
 		}
 	} else {
 		for(var i = 0; i<products.length;i++) {
 			if(products[i].hasParent===true && products[i].parent == ActiveParent) {
-				document.getElementById('content').innerHTML += "<div id=\"product\" onclick=\"ProductSelected("+i+")\">"+products[i].name+" - "+products[i].price+"</div>";
+				document.getElementById('content').innerHTML += "<div id=\"product\" onclick=\"ProductSelected("+i+")\">"+products[i].name+"</div>";
 			}
 		}
 	}
@@ -230,11 +230,11 @@ function SerializeProductselection() {
 	output = "products=";
 	for(var i = 0; i<OutputCollection.length;i++) {
 		if(OutputCollection[i].product.shouldOutput==true) {
-			output += "+" + OutputCollection[i].product.realId;
+			output += "+p" + OutputCollection[i].product.realId;
 		}
 		for(var j = 0; j < OutputCollection[i].subs.length; j++) {
 			if(OutputCollection[i].subs[j].product.shouldOutput==true) {
-				output += "+" + OutputCollection[i].subs[j].product.realId;
+				output += "+sp" + OutputCollection[i].subs[j].product.realId;
 			}
 		}
 	}

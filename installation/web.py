@@ -41,9 +41,9 @@ def systemHome():
 	#securety check
 	if util.checkSession(session) == False:
 		return redirect(url_for('systemAccess'))
-	return "you logged in but i have nothing for you over here. yet. try /system/selling.html"
+	return render_template('sysHome.html', generated_javascript = util.generatedJavascript())
 	
-#systemHome
+#selling page
 @app.route('/system/selling.html')
 def systemSelling():
 	#securety check
@@ -59,3 +59,11 @@ def StartWeb(shouldDebug=False):
 	app.secret_key = generated.secretKey
 	app.run(host='0.0.0.0')
 
+
+#api commands
+@app.route('/system/api/placeOrder.html', methods=['GET', 'POST'])
+def apiPlaceOrder():
+	if util.checkSession(session) == True:
+		#we give the get infos to to util function. no pain here :D
+		util.placeOrder(request.args.get)
+	return redirect(url_for('systemHome'))
