@@ -251,6 +251,29 @@ def addRawUser(name):
 	finally:
 		dbConnection.close()	
 
+def addUser(getArgs):
+	username = getArgs("username")
+	if username == "":
+		return False
+	newUserId = addRawUser(username)
+	if newUserId == False:
+		return False
+
+	dbConnection = sqlite3.connect("./marksystem/db/mark.db")
+	dbConnection.row_factory = sqlite3.Row
+	try:
+		userlevel = int(getArgs("userlevel"))
+		userhash = hashlib.sha256(getArgs("password")).hexdigest()
+		cursor = dbConnection.cursor()
+		cursor.execute(''' update user_info set hash=?, userlevel=? where id = ? ''', (userhash, userlevel, newUserId))
+		dbConnection.commit()
+		cursor.close()
+	except: 
+		return False
+	finally:
+		dbConnection.close()	
+	return True
+
 def placeOrder(getArgs):
 	#check if we should add a user
 	uId = 0
@@ -315,6 +338,20 @@ def placeOrder(getArgs):
         #were done here :D
         return True	
 
+def cancelOrder(getArgs):
+	dbConnection = sqlite3.connect("./marksystem/db/mark.db")
+	dbConnection.row_factory = sqlite3.Row
+	try:
+		cursor = dbConnection.cursor()
+		orderId = getArgs("orderId")
+		removePending(getArgs)
+		removeTransaction(getArgs)
+	except:
+		return False
+	finally:
+		dbConnection.close()
+	return True
+
 def removePending(getArgs):
     dbConnection = sqlite3.connect("./marksystem/db/mark.db")
     dbConnection.row_factory = sqlite3.Row
@@ -329,3 +366,61 @@ def removePending(getArgs):
     finally:
         dbConnection.close()
     return True
+
+def addTransaction(getArgs):
+	dbConnection = sqlite3.connect("./marksystem/db/mark.db")
+	dbConnection.row_factory = sqlite3.Row 
+	try:
+		description = getArgs("description")
+		inflow = float(getArgs("inflow"))
+		outflow = float(getArgs("outflow"))
+		userId = -1
+		productIds = "none"
+		isGenerated = False
+		currentDate = datetime.datetime.strftime(datetime.datetime.now(), "%y/%m/%d/%H/%M/%S")
+		cursor = dbConnection.cursor()
+		dataTouple = (description, inflow, outflow, userId, productIds, isGenerated, currentDate)
+		cursor.execute(''' instert into transactions(description, inflow, outflow, userID, productIDs, isGenerated, data) values (?,?,?,?,?,?,?) ''', dataTouple)
+		dbConnection.commit()
+		cursor.close()
+	except:
+		return False
+	finally:
+		dbConnection.close()
+
+def removeTransaction(getArgs):
+	dbConnection = sqlite3.connect("./marksystem/db/mark.db")
+	dbConnection.row_factory = sqlite3.Row
+	try:
+		orderId = int(getArgs("orderId"))
+		cursor = dbConnection.cursor()
+		#get all information about this transactionId
+		cursor.execute(''' delete from transactions where id = ?''', (orderId, ))
+		try:
+			cursor.execute(''' delete from debtTransactions where transactionId = ?''', (orderId, ))
+		except:
+			pass
+		dbConnection.commit()
+		cursor.close()
+	except:
+		return False
+	finally:
+		dbConnection.close()
+
+	return True
+
+def finishDebt(getArgs):
+	dbConnection = sqlite3.connect("./marksystem/db/mark.db")
+	dbConnection.row_factory = sqlite3.Row 
+	try:
+		userId = int(getArgs("userId"))
+		cursor = dbConnection.cursor()
+		cursor.execute('''update debtTransactions set isPaied=1 where userId = ? ''', (userId, ))
+		dbConnection.commit()
+		cursor.close()
+	except:
+		return False
+	finally:
+		dbConnection.close()
+	return True
+

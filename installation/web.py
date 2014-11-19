@@ -81,6 +81,18 @@ def apiFinishOrder():
                 util.removePending(request.args.get)
         return redirect(url_for('systemHome'))
 
+@app.route('/system/api/cancelOrder.html', methods=['GET', 'POST'])
+def apiCancelOrder():
+        if util.checkSession(session) == True:
+                util.cancelOrder(request.args.get)
+        return redirect(url_for('systemHome'))
+
+@app.route('/system/api/finishDebt.html', methods=['GET', 'POST'])
+def apiFinishDept():
+        if util.checkSession(session) == True:
+                util.finishDebt(request.args.get) 
+        return redirect(url_for('systemHome'))
+
 @app.route('/system/api/addProduct.html', methods=['GET', 'POST'])
 def apiAddProduct():
         if util.checkSession(session) == True:
@@ -92,3 +104,29 @@ def apiChangeProduct():
         if util.checkSession(session) == True:
                 util.changeProduct(request.args.get)
         return redirect(url_for('systemHome'))
+
+@app.route('/system/api/addUser.html', methods=['GET', 'POST'])
+def apiAddUser():
+        if util.checkSession(session) == True:
+                util.addUser(request.values.get) #todo
+        return redirect(url_for('systemHome'))
+
+@app.route('/system/api/changeUser.html', methods=['GET', 'POST'])
+def apiChangeUser():
+        if util.checkSession(session) == True:
+                util.changeUser(request.values.get) #todo
+        return redirect(url_for('systemHome'))
+
+@app.route('/system/api/addTransaction.html', methods=['GET', 'POST'])
+def apiAddTransaction():
+        if util.checkSession(session) == True:
+                util.addTransaction(request.args.get) 
+        return redirect(url_for('systemHome'))
+
+@app.route('/system/api/removeTransaction.html', methods=['GET', 'POST'])
+def apiRemoveTransaction():
+        if util.checkSession(session) == True:
+                util.removeTransaction(request.args.get) 
+        return redirect(url_for('systemHome'))
+
+
