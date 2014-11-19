@@ -1,7 +1,18 @@
 body div#content_bottom div#area div#area_content{
     min-height: 300px;   
+    overflow-y: auto;
+    width: 100%;
 }
 
+body div#content_bottom {
+    top: 0px;
+    position: absolute;
+    left: 50%;
+    width: 1024px;
+    height: 780px;
+    
+    
+}
 div#sidebar_bottom button {
     width:150px;
     height: 50px;
@@ -39,7 +50,6 @@ div#PendingOrder_content div#singlePendingOrder {
     width: 500px;
     margin-left: 20px;
     margin-top: 4px;
-    min-height: 65px;
 }
 
 div#PendingOrder_content div#singlePendingOrder div#PendingOrderUser {
@@ -55,27 +65,10 @@ div#PendingOrder_content div#singlePendingOrder div#PendingOrderProduct {
 }
 
 div#PendingOrder_content div#singlePendingOrder button#FinishPendingOrderButton {
-    position: absolute;
-    background-color: #000000;
-    right: 30px;
-    top: 10px;
-    color: #e98f0a;
-    box-shadow: 0px 0px 16px 2px rgba(0,0,0,0.3);
-    width: 50px;
-    height: 50px;
-    border-radius: 35px;
-    border-color: #000000;
+    display: none;
 }
 
 div#PendingOrder_content div#singlePendingOrder button#CancelPendingOrderButton {
-    position: absolute;
-    background-color: #000000;
-    right: 100px;
-    top: 10px;
-    color: #e98f0a;
-    box-shadow: 0px 0px 16px 2px rgba(0,0,0,0.3);
-    width: 80px;
-    height: 50px;
-    border-radius: 35px;
-    border-color: #000000;
+    display: none;
 }
+

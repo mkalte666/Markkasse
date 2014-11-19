@@ -77,11 +77,21 @@ def createSessionForUser(username, session):
 #priduct and sell managemenrt API
 
 #adds a product and returns true if successfull
-def addProduct(name, price, hasParent, parent):
-	dbConnectoin = sqlite3.connect("./marksystem/db/mark.db")
+def addProduct(getArgs):
+	dbConnection = sqlite3.connect("./marksystem/db/mark.db")
+        dbConnection.row_factory = sqlite3.Row
 	try:	
+                name = getArgs("name")
+                price = float(getArgs("price"))
+                hasParent = False
+                if getArgs("hasParent")=="true":
+                    hasParent = True
+                buyable = False
+                if getArgs("isBuyable")=="true":
+                    buyable = True;
+                parent = int(getArgs("parent"))
 		cursor = dbConnection.cursor()
-		cursor.execute('''insert into products(name, price, amoutInStock, image, IsSubproduct, parent) values (?, ?, -1, 'invalid', ?, ?) ''', (name, price, hasParent, parent))
+		cursor.execute('''insert into products(name, price, amoutInStock, image, IsSubproduct, parent, isBuyable) values (?, ?, -1, 'invalid', ?, ?, ?) ''', (name, price, hasParent, parent, buyable))
 		dbConnection.commit()
 		cursor.close()
 	except:
@@ -91,15 +101,21 @@ def addProduct(name, price, hasParent, parent):
 	return True	
 
 #changes product with id pid. to delete, set isDeleted to true
-def changeProduct(pId, name, price, isDeleted=False):
+def changeProduct(getArgs):
 	dbConnection = sqlite3.connect("./marksystem/db/mark.db")
+        dbConnection.row_factory = sqlite3.Row
 	try:
+                pId = int(getArgs("pId"))
+                name = getArgs("name")
+                price = float(getArgs("price"))
 		cursor = dbConnection.cursor()
-		if isDeleted==True:
+		if getArgs("isDeleted")=="true":
 			cursor.execute('''delete from products where id = ? ''', (pId, ))
 		else:
 			cursor.execute('''update products set name=?, price=? where id = ?''', (name, price, pId))
-	except:
+	        dbConnection.commit()
+                cursor.close()
+        except:
 		return False;
 	finally:
 		dbConnection.close()
@@ -299,4 +315,17 @@ def placeOrder(getArgs):
         #were done here :D
         return True	
 
-
+def removePending(getArgs):
+    dbConnection = sqlite3.connect("./marksystem/db/mark.db")
+    dbConnection.row_factory = sqlite3.Row
+    try:
+        orderId = int(getArgs("orderId"))
+        cursor = dbConnection.cursor()
+        cursor.execute(''' delete from pending_orders where transactionId = ?''', (orderId, ))
+        dbConnection.commit()
+        cursor.close()
+    except:
+        return False
+    finally:
+        dbConnection.close()
+    return True

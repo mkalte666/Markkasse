@@ -51,6 +51,13 @@ def systemSelling():
 		return redirect(url_for('systemAccess'))
 	return render_template('selling.html', generated_javascript = util.generatedJavascript())
 
+@app.route('/system/orderlist.html')
+def orderlist():
+        #sec checkSession
+        if util.checkSession(session) == False:
+                return redirect(url_for('systemAccess'))
+        return render_template('orderlist.html', generated_javascript = util.generatedJavascript())
+
 #start if the web-application
 def StartWeb(shouldDebug=False):
 	#util.setupDb()
@@ -67,3 +74,21 @@ def apiPlaceOrder():
 		#we give the get infos to to util function. no pain here :D
 		util.placeOrder(request.args.get)
 	return redirect(url_for('systemHome'))
+
+@app.route('/system/api/finishOrder.html', methods=['GET', 'POST'])
+def apiFinishOrder():
+        if util.checkSession(session) == True:
+                util.removePending(request.args.get)
+        return redirect(url_for('systemHome'))
+
+@app.route('/system/api/addProduct.html', methods=['GET', 'POST'])
+def apiAddProduct():
+        if util.checkSession(session) == True:
+                util.addProduct(request.args.get)
+        return redirect(url_for('systemHome'))
+
+@app.route('/system/api/changeProduct.html', methods=['GET', 'POST'])
+def apiChangeProduct():
+        if util.checkSession(session) == True:
+                util.changeProduct(request.args.get)
+        return redirect(url_for('systemHome'))

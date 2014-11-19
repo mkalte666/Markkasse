@@ -206,7 +206,7 @@ function ProductSelected(id) {
 	//find out if there are objects with this object as parent
 	var hasChildren = false;
 	for(var i = 0; i<products.length;i++) {
-		if(products[i].parent == id) {
+		if(products[i].parent == products[id].realId) {
 			hasChildren = true;
 			break;
 		}
@@ -214,7 +214,7 @@ function ProductSelected(id) {
 	
 	if(hasChildren===true) {
 			isParentActive = true;
-			ActiveParent = id;
+			ActiveParent = products[id].realId;
 	}
 	
 	DrawProductScreen();

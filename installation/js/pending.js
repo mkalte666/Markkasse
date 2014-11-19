@@ -15,7 +15,7 @@ function productnameById(id)
 	        }
         }
 }
-
+ 
 function DrawPendingOrders(destination, drawOnlyOverview, maxorders, maxproducts)
 {
 	orderString = "";
@@ -26,10 +26,15 @@ function DrawPendingOrders(destination, drawOnlyOverview, maxorders, maxproducts
 		for(var j = 0; j<pendingOrderProducts[i].length && j<maxproducts;j++) {
 			orderString += "<div id=\"PendingOrderProduct\">"+productnameById(pendingOrderProducts[i][j])+"</div>";
 		}
-		orderString += "<button id=\"FinishPendingOrderButton\">"+"Done"+"</button>";
+		orderString += "<button id=\"FinishPendingOrderButton\" onclick=\"finishPendingOrder("+i+")\">"+"Done"+"</button>";
 		orderString += "<button id=\"CancelPendingOrderButton\">"+"Cancel"+"</button>";
 		orderString += "</div>"
 	}
 		    
 	document.getElementById(destination).innerHTML += orderString;
+}
+
+function finishPendingOrder(id)
+{
+	document.location.href = "/system/api/finishOrder.html?orderId="+pendingOrderIds[id];
 }
