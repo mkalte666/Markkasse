@@ -39,13 +39,13 @@ function Key(normal, upper) {
      var destinationId = "null";     
      var spaceKeys = [ 53 ];
      function keyboardSetup(destid) {
-          keys = [];
+          /* keys = [];
           destinationId = destid;
           for(var i = 0; i <= keys_upper.length; i++) {
                 keys.push(new Key(keys_lower[i], keys_upper[i]));
           }
           document.getElementById("keyboard").style.display = '';
-          draw();
+          draw();*/
      }
 
 
