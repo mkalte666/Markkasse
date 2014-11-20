@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-
+# -*- coding: utf-8 -*-
 import marksystem.db
 import marksystem.util
 from marksystem.logger import Logger

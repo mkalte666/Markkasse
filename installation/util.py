@@ -45,12 +45,12 @@ def checkSession(session):
 				dbConnection.close()
 				return False
 			cursor = dbConnection.cursor()
-			print "b"
+			#print "b"
         	        cursor.execute('select session from user_info where name = ?', (paramList[0],))
 			row = cursor.fetchone()
 			dbConnection.commit()
 			cursor.close()
-			print row['session']
+			#print row['session']
 			if row['session'] == paramList[1]:
 				dbConnection.close()
 				return True
@@ -150,19 +150,19 @@ def generatedJavascript():
 	
         #fill the product-specific arrays
 	for row in cursor.execute('''select * from products'''):
-		pids +=str(row['id'])+","
-		names += "\""+str(row['name'])+"\","
-		prices +=str(row['price'])+","
-		pHasParent +=str(itob(row['isSubproduct'])).lower()+","
-		pShouldOutput += str(itob(row['isBuyable'])).lower()+","
-		parents += str(row['parent'])+","
+		pids +=unicode(row['id'])+","
+		names += "\""+unicode(row['name'])+"\","
+		prices +=unicode(row['price'])+","
+		pHasParent +=unicode(itob(row['isSubproduct'])).lower()+","
+		pShouldOutput += unicode(itob(row['isBuyable'])).lower()+","
+		parents += unicode(row['parent'])+","
 	
         #the user-stuffi
 	cursor.execute('''select * from user_info''')
 	rows = cursor.fetchall() 
 	for row in rows:
-		uIds +=str(row['id'])+","
-		RawUsers += "\""+str(row['name'])+"\","
+		uIds +=unicode(row['id'])+","
+		RawUsers += "\""+unicode(row['name'])+"\","
 		debts_current = 0.0
 		canBuy = True;
 		#meashure ows and calculate if user can buy stuff
@@ -177,18 +177,18 @@ def generatedJavascript():
 				today = datetime.date.today
 				if datetime.datetime.now() < maxDate:
 					canBuy = False
-		debts+=str(debts_current)+","
-		uAbleToBuy += str(canBuy).lower()+","
+		debts+=unicode(debts_current)+","
+		uAbleToBuy += unicode(canBuy).lower()+","
 	
 	#all orders that are currently pending will be written, too
 	cursor.execute('''select * from pending_orders''')
         rows = cursor.fetchall()
         for row in rows:
-            pendingOrderIds += str(row['transactionId'])+","
+            pendingOrderIds += unicode(row['transactionId'])+","
             cursor.execute('''select * from transactions where id = ? LIMIT 1''', (row['transactionId'],))
             rows2 = cursor.fetchall()
             for row2 in rows2:
-                pendingOrderUIds+= str(row2['userID'])+","
+                pendingOrderUIds+= unicode(row2['userID'])+","
                 #to parse the pending products we have to split the product ids in the transaction.
                 #these are seperated by '+'s
                 pendingOrderProductsRaw = row2['productIds'].split('+')
@@ -313,7 +313,7 @@ def placeOrder(getArgs):
             #the ids are split and then rejoined cause then noone can put sql-inject asshole stuff in it!
             productString = ""
             for pId in productIds:
-                productString+=str(pId)+"+"
+                productString+=unicode(pId)+"+"
             
             
             currentDate = datetime.datetime.strftime(datetime.datetime.now(), "%y/%m/%d/%H/%M/%S")

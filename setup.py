@@ -10,8 +10,8 @@ import binascii
 print "Setting Up Mark System"
 print "This will, delete all data but the ones in the backup-folder !"
 print "If you are shure you want to continue, type \" YES \". yep, in capslock!\n"
-ShouldInstall = str(raw_input("Shure? "))
-if ShouldInstall != str("YES"):
+ShouldInstall = unicode(raw_input("Shure? "))
+if ShouldInstall != unicode("YES"):
 	print "Quitting Installation...\n"
 	sys.exit()
 
@@ -57,12 +57,12 @@ cursor.execute('''CREATE TABLE debtTransactions(id INTEGER PRIMARY KEY, transact
 print "Setting basic information in Database"
 cursor.execute('''insert into products(name, price, isSubproduct, parent, isBuyable) values ('remove me!', 3.0, 0, -1, 1)''')
 print "Set Root User:"
-username = str(raw_input("Username: "))
+username = unicode(raw_input("Username: "))
 password = "not the"
 passwordConfirm = "same"
 while password != passwordConfirm:
-	password = hashlib.sha256(str(raw_input("Password: "))).hexdigest()
-	passwordConfirm = hashlib.sha256(str(raw_input("Confirm: "))).hexdigest()
+	password = hashlib.sha256(unicode(raw_input("Password: "))).hexdigest()
+	passwordConfirm = hashlib.sha256(unicode(raw_input("Confirm: "))).hexdigest()
 print "Change Password after logging in for the first time!!!"
 cursor.execute('''INSERT INTO user_info (name, hash, session, userlevel) VALUES (?, ?, 'invalid', 9001)''', (username, password, ))
 connection.commit()
@@ -73,10 +73,10 @@ print "Done!\n"
 print "Genarating files"
 sessionKey = os.urandom(24).encode('hex')
 outfile = open('./marksystem/generated.py', 'w')
-outfile.write("secretKey = '"+str(sessionKey)+"'\n")
+outfile.write("secretKey = '"+unicode(sessionKey)+"'\n")
 maxdays = 6
 maxdays = input("Input maximal time user can owe the system Money:")
-outfile.write("maxdays = "+str(maxdays)+"\n")
+outfile.write("maxdays = "+unicode(maxdays)+"\n")
 outfile.close()
 print "Done!"
 
