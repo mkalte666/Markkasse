@@ -58,7 +58,7 @@ def checkSession(session):
 			pass
 	dbConnection.close()
 	return False
-
+ 
 def createSessionForUser(username, session):
 	dbConnection = sqlite3.connect("./marksystem/db/mark.db")
 	sessionRandom = os.urandom(16).encode('hex')
@@ -175,7 +175,7 @@ def generatedJavascript():
 				debts_current += row3['inflow'];
 				maxDate = datetime.datetime.strptime(row3['date'], '%y/%m/%d/%H/%M/%S')+datetime.timedelta(days=generated.maxdays)
 				today = datetime.date.today
-				if datetime.datetime.now() < maxDate:
+				if datetime.datetime.now() > maxDate:
 					canBuy = False
 		debts+=unicode(debts_current)+","
 		uAbleToBuy += unicode(canBuy).lower()+","
@@ -424,3 +424,37 @@ def finishDebt(getArgs):
 		dbConnection.close()
 	return True
 
+def transactionData(getArgs):
+        method = 0
+        lowerLimit = 0
+        upperLimit = 20
+        lowerDateLimit = datetime.datetime()
+        upperDateLimit = datetime.datetime()
+        if getArgs("order")=="limit":
+            lowerLimit = getArgs("lowerLimit")
+            upperLimit = getArgs("upperLimit")
+            method = 0
+        if getArgs("order")=="date":
+            if getArgs("upperDateLimit") == "now":
+                upperDateLimit = datetime.datetime.now()
+            lowerDateLimit = upperDateLimit - datetime.timedelta(days=int(getArgs("daysBack")), months=int(getArgs("monthsBack"))) 
+            method = 1
+
+def transactionCSV(getArgs):
+        dbConnection = sqlite3.connect("./marksystem/db/mark.db")
+        dbConnection.row_factory = sqlite3.Row
+        try:
+            cursor = dbConnection.cursor()
+            cursor.execute('''select * from transactions''')
+            rows = cursor.fetchall()
+            ret = list()
+            ret.append(['Date', 'isGenerated', 'description', 'inflow', 'outflow'])
+            for row in rows:
+                ret.append([unicode(row['date']), unicode(row['isGenerated']), unicode(row['description']), unicode(row['inflow']), unicode(row['outflow'])])
+            return ret
+        except:
+            return None
+        finally:
+            dbConnection.close()
+
+        return None

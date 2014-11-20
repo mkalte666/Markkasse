@@ -4,7 +4,7 @@ import os
 import logger
 import generated
 import util
-from flask import Flask, render_template, session, redirect, url_for, escape, request
+from flask import Flask, render_template, session, redirect, url_for, escape, request, Response
 app = Flask(__name__)
 
 Mediatypes = [ 'png', 'jpeg', 'jpg', 'gif',]
@@ -67,6 +67,14 @@ def orderlist():
         if util.checkSession(session) == False:
                 return redirect(url_for('systemAccess'))
         return render_template('orderlist.html', generated_javascript = util.generatedJavascript())
+
+
+@app.route('/system/transaction.html', methods=['GET', 'POST'])
+def transaction():
+        #sec checkSession
+        if util.checkSession(session) == False:
+                return redirect(url_for('systemAccess'))
+        return render_template('transaction.html', generated_javascript = util.generatedJavascript(), transaction_data = util.transactionData(request.values.get))
 
 
 
@@ -139,6 +147,16 @@ def apiAddTransaction():
 def apiRemoveTransaction():
         if util.checkSession(session) == True:
                 util.removeTransaction(request.args.get) 
+        return redirect(url_for('systemHome'))
+
+@app.route('/system/api/transaction.csv', methods=['GET', 'POST'])
+def apiCsvTransaction():
+        if util.checkSession(session) == True:
+                rows = util.transactionCSV(request.args.get) 
+                def generate():
+                    for row in rows:
+                        yield ','.join(row) + '\n'
+                return Response(generate(), mimetype='text/csv')
         return redirect(url_for('systemHome'))
 
 
