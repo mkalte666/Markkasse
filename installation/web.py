@@ -51,12 +51,24 @@ def systemSelling():
 		return redirect(url_for('systemAccess'))
 	return render_template('selling.html', generated_javascript = util.generatedJavascript())
 
+#selling page
+@app.route('/system/pmanager.html')
+def systemPmanager():
+	#securety check
+	if util.checkSession(session) == False:
+		return redirect(url_for('systemAccess'))
+	return render_template('pmanager.html', generated_javascript = util.generatedJavascript())
+
+
+
 @app.route('/system/orderlist.html')
 def orderlist():
         #sec checkSession
         if util.checkSession(session) == False:
                 return redirect(url_for('systemAccess'))
         return render_template('orderlist.html', generated_javascript = util.generatedJavascript())
+
+
 
 #start if the web-application
 def StartWeb(shouldDebug=False):
@@ -97,13 +109,13 @@ def apiFinishDept():
 def apiAddProduct():
         if util.checkSession(session) == True:
                 util.addProduct(request.args.get)
-        return redirect(url_for('systemHome'))
+        return redirect(url_for('systemPmanager'))
 
 @app.route('/system/api/changeProduct.html', methods=['GET', 'POST'])
 def apiChangeProduct():
         if util.checkSession(session) == True:
                 util.changeProduct(request.args.get)
-        return redirect(url_for('systemHome'))
+        return redirect(url_for('systemPmanager'))
 
 @app.route('/system/api/addUser.html', methods=['GET', 'POST'])
 def apiAddUser():

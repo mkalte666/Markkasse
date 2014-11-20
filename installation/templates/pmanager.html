@@ -1,0 +1,53 @@
+{% extends "homepage.html" %} 
+{% block title %}Index{% endblock %}
+{% block head %}
+    {{ super() }}
+	<link rel="stylesheet" href="/static/css/selling.css" />
+	<script src="/static/js/selling.js" charset="UTF-8" type="text/javascript"></script>
+	<script src="/static/js/pmanager.js" charset="UTF-8" type="text/javascript"></script>
+{% endblock %}
+
+{% block content_top %}
+<div id="area">
+	<div id="area_headline"><div id="areatext"><div id="usernameOutput" ><div id="usernameText" onclick="DrawUserSelectoin()">Select User...</div></div></div></div>
+	<div id="area_content">
+		<div id="headline"><div id="areatext">Angeschrieben: <div id="usernameDebt"></div></div></div>
+	</div>
+</div>
+{% endblock %}
+
+
+{% block content_bottom %}
+<div id="area">
+	<div id="area_headline"><div id="areatext"><input type="text"  id="pmanager_name"/><input type="text" id="pmanager_price" /><button id="pmanager_modify" onclick="ProductManagerUpdate()">Update</button><button id="pmanager_delete" onclick="ProductManagerDelete()">Delete</button></div></div>
+	<div id="area_content"><div id="areatext">
+		<div id="content"></div>
+		<div id="newProductContent">
+			<input type="text" id="pmanager_new_name" />
+			<input type="text" id="pmanager_new_price"  />
+			<input type="checkbox" id="pmanager_new_isBuyable" checked="true" />
+			<button onclick="ProductManagerAddNewFinish()">Done</button>
+		</div>
+		<div id="productControl">
+			<button onclick="ProductManagerBack()">Zurueck</button>
+			<button onclick="ProductCancel()">Abbrechen</button>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+
+	DrawManagerScreen();
+</script>
+{% endblock %}
+
+
+{% block sidebar_bottom %}
+<div id="area">
+	<div id="area_headline"><div id="areatext">Auswahl</div></div>
+	<div id="area_content"><div id="areatext">
+		<div id="sidebarOutput">
+		
+		</div>
+	</div>
+</div>
+{% endblock %}
